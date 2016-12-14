@@ -1,9 +1,28 @@
-
+// Load required packages
+var CoffeeShop = require('../models/coffeeShop');
 
 exports.getCoffeeShops = function(req, res) {
-  res.send("[GET]");
+  CoffeeShop.find({}, function(err, coffeeShops) {
+    if (err) { res.send(err); }
+
+    res.send(coffeeShops);
+  });
 };
 
 exports.postCoffeeShops = function(req, res) {
-  res.send("[POST] " + req.body.name);
+  var coffeeShop = new CoffeeShop();
+
+  coffeeShop.name = req.body.name;
+  coffeeShop.ownerId = req.body.ownerId;
+  coffeeShop.address = req.body.address;
+
+  // Save
+  coffeeShop.save(function(err) {
+    if (err) { res.send(err); }
+
+    res.json({
+      message: "Successfully created CoffeeShop!",
+      data: coffeeShop
+    })
+  });
 };
