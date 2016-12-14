@@ -4,6 +4,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+// Local files
+var authController = require('./controllers/auth');
+var userController = require('./controllers/user');
+var coffeeShopController = require('./controllers/coffeeShop');
+
 // Config
 var config = require('./config.json');
 
@@ -27,10 +32,21 @@ app.use(bodyParser.urlencoded({
 var router = express.Router();
 
 // Define router endpoints
+router.route('/')
+  .get(function(req, res) {
+    res.send("GET home");
+  })
+  .post(function(req, res) {
+    var name = req.body.name;
+    res.send("POST home " + name);
+  })
 
+router.route('/coffeeShops')
+  .get(coffeeShopController.getCoffeeShops)
+  .post(coffeeShopController.postCoffeeShops)
 
 // Register the routes
-
+app.use(router);
 
 // Start the server
 var port = process.env.PORT || 3000;
