@@ -14,7 +14,6 @@ var config = require('./config.json');
 
 // Connect to DB
 var mongo_url = config.mongo_url || process.env.MONGO_URL;
-console.log("")
 mongoose.connect(mongo_url, function(err) {
   if (err)
     return console.log(err);
@@ -45,8 +44,12 @@ router.route('/coffeeShops')
   .get(coffeeShopController.getCoffeeShops)
   .post(coffeeShopController.postCoffeeShops)
 
+router.route('/users')
+  .get(userController.getUsers)
+  .post(userController.postUsers)
+
 // Register the routes
-app.use(router);
+app.use('/api', router);
 
 // Start the server
 var port = process.env.PORT || 3000;
