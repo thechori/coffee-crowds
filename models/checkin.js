@@ -8,6 +8,8 @@ var CheckinSchema = new mongoose.Schema({
     min: 1,
     max: 5
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('Checkin', CheckinSchema);

@@ -19,6 +19,8 @@ var UserSchema = new mongoose.Schema({
     required: true
   },
   bio: String
+}, {
+  timestamps: true
 });
 
 // Execute before each user.save() call

@@ -5,7 +5,9 @@ var mongoose = require('mongoose');
 var CoffeeShopSchema = new mongoose.Schema({
   name: String,
   ownerId: String,
-  address: String
+  address: String,
+}, {
+  timestamps: true
 });
 
 // Export Schema

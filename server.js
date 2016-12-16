@@ -35,6 +35,11 @@ router.route('/coffeeShops')
   .get(authController.isAuthenticated, coffeeShopController.getCoffeeShops)
   .post(authController.isAuthenticated, coffeeShopController.postCoffeeShops)
 
+router.route('/coffeeShops/:coffeeShopId')
+  .get(authController.isAuthenticated, coffeeShopController.getCoffeeShopById)
+  .put(authController.isAuthenticated, coffeeShopController.putCoffeeShopById)
+  .delete(authController.isAuthenticated, coffeeShopController.deleteCoffeeShopById)
+
 router.route('/users')
   .get(authController.isAuthenticated, userController.getUsers)
   .post(authController.isAuthenticated, userController.postUsers)

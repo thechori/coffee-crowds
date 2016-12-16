@@ -26,3 +26,24 @@ exports.postCoffeeShops = function(req, res) {
     })
   });
 };
+
+exports.getCoffeeShopById = function(req, res) {
+  CoffeeShop.findOne({
+    _id: req.params.coffeeShopId
+  }, function(err, coffeeShop) {
+    if (err) { return res.send(err); }
+
+    res.json({
+      message: "Successfully retrieved CoffeeShop!",
+      data: coffeeShop
+    });
+  });
+};
+
+exports.putCoffeeShopById = function(req, res) {
+
+};
+
+exports.deleteCoffeeShopById = function(req, res) {
+
+};
