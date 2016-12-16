@@ -25,6 +25,8 @@ exports.postUsers = function(req, res) {
     if (err)
       return res.send(err);
 
+    user.sayMyName();
+
     res.json({
       message: "New coffee enthusiast added!",
       data: user

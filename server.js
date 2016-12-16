@@ -31,22 +31,13 @@ app.use(bodyParser.urlencoded({
 var router = express.Router();
 
 // Define router endpoints
-router.route('/')
-  .get(function(req, res) {
-    res.send("GET home");
-  })
-  .post(function(req, res) {
-    var name = req.body.name;
-    res.send("POST home " + name);
-  })
-
 router.route('/coffeeShops')
-  .get(coffeeShopController.getCoffeeShops)
-  .post(coffeeShopController.postCoffeeShops)
+  .get(authController.isAuthenticated, coffeeShopController.getCoffeeShops)
+  .post(authController.isAuthenticated, coffeeShopController.postCoffeeShops)
 
 router.route('/users')
-  .get(userController.getUsers)
-  .post(userController.postUsers)
+  .get(authController.isAuthenticated, userController.getUsers)
+  .post(authController.isAuthenticated, userController.postUsers)
 
 // Register the routes
 app.use('/api', router);
