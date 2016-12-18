@@ -3,7 +3,6 @@ var Checkin = require('../models/checkin');
 exports.postCheckins = function(req, res) {
   var checkin = new Checkin();
 
-  checkin.createdAt = new Date();
   checkin.crowdRating = req.body.crowdRating;
   checkin.userId = req.user._id;
 
