@@ -2,7 +2,7 @@
 var CoffeeShop = require('../models/coffeeShop');
 
 exports.getCoffeeShops = function(req, res) {
-  CoffeeShop.find({}, function(err, coffeeShops) {
+  CoffeeShop.find(function(err, coffeeShops) {
     if (err) { res.send(err); }
 
     res.send(coffeeShops);
@@ -28,9 +28,7 @@ exports.postCoffeeShops = function(req, res) {
 };
 
 exports.getCoffeeShopById = function(req, res) {
-  CoffeeShop.findOne({
-    _id: req.params.coffeeShopId
-  }, function(err, coffeeShop) {
+  CoffeeShop.findById(req.params.coffeeShopId, function(err, coffeeShop) {
     if (err) { return res.send(err); }
 
     res.json({
@@ -41,9 +39,34 @@ exports.getCoffeeShopById = function(req, res) {
 };
 
 exports.putCoffeeShopById = function(req, res) {
+  CoffeeShop.findById(req.params.coffeeShopId, function(err, coffeeShop) {
+    if (err) { return res.send(err); }
 
+    // Update information using the request's body parameters
+    coffeeShop.name = req.body.name;
+    coffeeShop.ownerId = req.body.ownerId;
+    coffeeShop.address = req.body.address;
+
+    // Save CoffeeShop
+    coffeeShop.save(function(err) {
+      if (err) { return res.send(err); }
+
+      res.json({
+        message: "Successfully PUT CoffeeShop by ID!",
+        data: coffeeShop
+      })
+    });
+  });
 };
 
 exports.deleteCoffeeShopById = function(req, res) {
+  CoffeeShop.remove({
+    _id: req.body.coffeeShopId
+  }, function(err) {
+    if (err) { return res.send(err); }
 
+    res.json({
+      message: "Successfully removed CoffeeShop!"
+    });
+  });
 };
