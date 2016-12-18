@@ -2,7 +2,9 @@
 var CoffeeShop = require('../models/coffeeShop');
 
 exports.getCoffeeShops = function(req, res) {
-  CoffeeShop.find(function(err, coffeeShops) {
+  CoffeeShop.find({
+    userId: req.user._id
+  }, function(err, coffeeShops) {
     if (err) { res.send(err); }
 
     res.send(coffeeShops);
@@ -13,7 +15,7 @@ exports.postCoffeeShops = function(req, res) {
   var coffeeShop = new CoffeeShop();
 
   coffeeShop.name = req.body.name;
-  coffeeShop.ownerId = req.body.ownerId;
+  coffeeShop.userId = req.user._id;
   coffeeShop.address = req.body.address;
 
   // Save
@@ -44,7 +46,7 @@ exports.putCoffeeShopById = function(req, res) {
 
     // Update information using the request's body parameters
     coffeeShop.name = req.body.name;
-    coffeeShop.ownerId = req.body.ownerId;
+    coffeeShop.userId = req.body.userId;
     coffeeShop.address = req.body.address;
 
     // Save CoffeeShop

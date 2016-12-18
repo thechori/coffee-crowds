@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 // Define Schema
 var CoffeeShopSchema = new mongoose.Schema({
   name: String,
-  ownerId: String,
+  userId: String,
   address: String,
 }, {
   timestamps: true
