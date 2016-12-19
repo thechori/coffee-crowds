@@ -50,15 +50,19 @@ exports.putCoffeeShopById = function(req, res) {
   }, function(err, coffeeShop) {
     if (err) { return res.send(err); }
 
-    console.log("id: " + req.params.coffeeShopId);
-    // console.log("userId: " + req.user._id)
-
     if (!coffeeShop) { return res.send("No CoffeeShop found.."); }
 
     // Update information using the request's body parameters
-    coffeeShop.name = req.body.name;
-    coffeeShop.userId = req.body.userId;
-    coffeeShop.address = req.body.address;
+    // Only update field if it has been included in body of request
+    if (req.body.name) {
+      coffeeShop.name = req.body.name;
+    }
+    if (req.body.userId) {
+      coffeeShop.userId = req.body.userId;
+    }
+    if (req.body.address) {
+      coffeeShop.address = req.body.address;
+    }
 
     // Save CoffeeShop
     coffeeShop.save(function(err) {
