@@ -44,8 +44,16 @@ exports.getCoffeeShopById = function(req, res) {
 };
 
 exports.putCoffeeShopById = function(req, res) {
-  CoffeeShop.findById(req.params.coffeeShopId, function(err, coffeeShop) {
+  CoffeeShop.findOne({
+    _id: req.params.coffeeShopId,
+    userId: req.user._id
+  }, function(err, coffeeShop) {
     if (err) { return res.send(err); }
+
+    console.log("id: " + req.params.coffeeShopId);
+    // console.log("userId: " + req.user._id)
+
+    if (!coffeeShop) { return res.send("No CoffeeShop found.."); }
 
     // Update information using the request's body parameters
     coffeeShop.name = req.body.name;
@@ -66,7 +74,8 @@ exports.putCoffeeShopById = function(req, res) {
 
 exports.deleteCoffeeShopById = function(req, res) {
   CoffeeShop.remove({
-    _id: req.body.coffeeShopId
+    _id: req.body.coffeeShopId,
+    userId: req.user._id
   }, function(err) {
     if (err) { return res.send(err); }
 
