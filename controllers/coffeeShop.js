@@ -30,7 +30,10 @@ exports.postCoffeeShops = function(req, res) {
 };
 
 exports.getCoffeeShopById = function(req, res) {
-  CoffeeShop.findById(req.params.coffeeShopId, function(err, coffeeShop) {
+  CoffeeShop.find({
+    _id: req.params.coffeeShopId,
+    userId: req.user._id
+  }, function(err, coffeeShop) {
     if (err) { return res.send(err); }
 
     res.json({
