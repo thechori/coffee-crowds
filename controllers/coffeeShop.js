@@ -78,7 +78,7 @@ exports.putCoffeeShopById = function(req, res) {
 
 exports.deleteCoffeeShopById = function(req, res) {
   CoffeeShop.remove({
-    _id: req.body.coffeeShopId,
+    _id: req.params.coffeeShopId,
     userId: req.user._id
   }, function(err) {
     if (err) { return res.send(err); }
