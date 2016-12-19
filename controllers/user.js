@@ -50,12 +50,24 @@ exports.putUserById = function(req, res) {
     if (err) { return res.send(err); }
 
     // Update User information
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.nameFirst = req.body.nameFirst;
-    user.nameLast = req.body.nameLast;
-    user.email = req.body.email;
-    user.bio = req.body.bio;
+    if (req.body.username) {
+      user.username = req.body.username;
+    }
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    if (req.body.nameFirst) {
+      user.nameFirst = req.body.nameFirst;
+    }
+    if (req.body.nameLast) {
+      user.nameLast = req.body.nameLast;
+    }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
+    if (req.body.bio) {
+      user.bio = req.body.bio;
+    }
 
     // Save the User
     user.save(function(err) {
