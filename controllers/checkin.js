@@ -6,7 +6,7 @@ exports.postCheckins = function(req, res) {
   checkin.crowdRating = req.body.crowdRating;
   checkin.userId = req.user._id;
 
-  checkin.save(funcion(err) {
+  checkin.save(function(err) {
     if (err) { return res.send(err); }
 
     res.json({
@@ -22,6 +22,21 @@ exports.getCheckins = function(req, res) {
   }, function(err, checkins) {
     if (err) { return res.send(err); }
 
-    res.send(checkins);
+    res.json({
+      message: "Grabbing Checkins!",
+      data: checkins
+    });
   });
+};
+
+exports.getCheckinById = function(req, res) {
+
+};
+
+exports.putCheckinById = function(req, res) {
+
+};
+
+exports.deleteCheckinById = function(req, res) {
+
 };

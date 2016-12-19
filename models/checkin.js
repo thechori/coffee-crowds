@@ -6,6 +6,11 @@ var CheckinSchema = new mongoose.Schema({
     type: Number,
     min: 1,
     max: 5
+  },
+  coffeeShopId: String,
+  comment: {
+    type: String,
+    max: 100
   }
 }, {
   timestamps: true

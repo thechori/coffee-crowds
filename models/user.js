@@ -18,7 +18,10 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
-  bio: String
+  bio: {
+    type: String,
+    max: 300
+  }
 }, {
   timestamps: true
 });

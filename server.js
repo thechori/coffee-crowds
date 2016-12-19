@@ -8,6 +8,7 @@ var passport = require('passport');
 var authController = require('./controllers/auth');
 var userController = require('./controllers/user');
 var coffeeShopController = require('./controllers/coffeeShop');
+var checkinController = require('./controllers/checkin');
 
 // Config
 var config = require('./config.json');
@@ -49,6 +50,14 @@ router.route('/users/:userId')
   .put(authController.isAuthenticated, userController.putUserById)
   .delete(authController.isAuthenticated, userController.deleteUserById)
 
+router.route('/checkins')
+  .get(authController.isAuthenticated, checkinController.getCheckins)
+  .post(authController.isAuthenticated, checkinController.postCheckins)
+
+router.route('/checkins/:checkinId')
+  .get(authController.isAuthenticated, checkinController.getCheckinById)
+  .put(authController.isAuthenticated, checkinController.putCheckinById)
+  .delete(authController.isAuthenticated, checkinController.deleteCheckinById)
 
 // Register the routes
 app.use('/api', router);
