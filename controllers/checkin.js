@@ -3,8 +3,10 @@ var Checkin = require('../models/checkin');
 exports.postCheckins = function(req, res) {
   var checkin = new Checkin();
 
-  checkin.crowdRating = req.body.crowdRating;
   checkin.userId = req.user._id;
+  checkin.crowdRating = req.body.crowdRating;
+  checkin.coffeeShopId = req.body.coffeeShopId;
+  checkin.comment = req.body.comment;
 
   checkin.save(function(err) {
     if (err) { return res.send(err); }
