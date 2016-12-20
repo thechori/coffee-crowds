@@ -8,7 +8,7 @@ Web application that utilizes user input to track which coffee shops are busy ar
 ## Installation
 1. Grab the source code from GitLab
   ```
-    $ git clone  
+    $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
   ```
 
 ## Slogans
@@ -16,7 +16,7 @@ Web application that utilizes user input to track which coffee shops are busy ar
 
 "Because you've got
 
-## TODO 
+## TODO
 - Build simple UI for web interaction
 
 ## Completed Items
