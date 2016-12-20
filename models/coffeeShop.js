@@ -3,9 +3,20 @@ var mongoose = require('mongoose');
 
 // Define Schema
 var CoffeeShopSchema = new mongoose.Schema({
-  name: String,
-  userId: String,
-  address: String,
+  name: {
+    required: true,
+    type: String,
+    max: 50
+  },
+  userId: {
+    required: true,
+    type: String
+  },
+  address: {
+    required: true,
+    type: String,
+    max: 50
+  }
 }, {
   timestamps: true
 });
