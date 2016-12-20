@@ -23,6 +23,9 @@ mongoose.connect(mongo_url, function(err) {
 // Initialize the app
 var app = express();
 
+// Set view engine
+app.set('view engine', 'pug');
+
 // Use body-parser
 app.use(bodyParser.urlencoded({
   extended: true
@@ -30,6 +33,14 @@ app.use(bodyParser.urlencoded({
 
 // Create the Express router
 var router = express.Router();
+
+// Test views
+app.get('/', function(req, res) {
+  res.render('index', {
+    title: "Coffee Crowds",
+    message: "Welcome to Coffee Crowds!"
+  });
+});
 
 // Define router endpoints
 router.route('/coffeeShops')
