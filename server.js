@@ -43,7 +43,7 @@ router.route('/coffeeShops/:coffeeShopId')
 
 router.route('/users')
   .get(authController.isAuthenticated, userController.getUsers)
-  .post(authController.isAuthenticated, userController.postUsers)
+  .post(userController.postUsers)
 
 router.route('/users/:userId')
   .get(authController.isAuthenticated, userController.getUserById)
@@ -58,6 +58,9 @@ router.route('/checkins/:checkinId')
   .get(authController.isAuthenticated, checkinController.getCheckinById)
   .put(authController.isAuthenticated, checkinController.putCheckinById)
   .delete(authController.isAuthenticated, checkinController.deleteCheckinById)
+
+router.route('/mycheckins')
+  .get(authController.isAuthenticated, checkinController.getMyCheckins)
 
 // Register the routes
 app.use('/api', router);

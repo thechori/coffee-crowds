@@ -1,5 +1,6 @@
 // Load required packages
 var CoffeeShop = require('../models/coffeeShop');
+var Checkin = require('../models/checkin');
 
 exports.getCoffeeShops = function(req, res) {
   CoffeeShop.find({
@@ -20,7 +21,7 @@ exports.postCoffeeShops = function(req, res) {
 
   // Save
   coffeeShop.save(function(err) {
-    if (err) { res.send(err); }
+    if (err) { return res.send(err); }
 
     res.json({
       message: "Successfully created CoffeeShop!",
@@ -85,6 +86,34 @@ exports.deleteCoffeeShopById = function(req, res) {
 
     res.json({
       message: "Successfully removed CoffeeShop!"
+    });
+  });
+};
+
+exports.getCurrentCrowdRatingById = function(req, res) {
+  var now = new Date();
+  var start = new Date(Date.now() - 3 * 60 * 60 * 1000); // 3 hours
+
+  CoffeeShop.findById(req.params.coffeeShopId, function(err, coffeeShop) {
+    if (err) { return res.send(err); }
+
+    // Grab all Checkins with this coffeeShopId that have been
+    // created within the last 3 hours
+    Checkin.find({
+      _id: coffeeShop._id,
+      createdAt: {
+        $gt: start
+      }
+    }, function(err, checkins) {
+      if (err) { return res.send(err); }
+
+      if (!checkins) { return res.send("No Checkins found!"); }
+
+      // Return the Checkins found
+      res.json({
+        message: "Checkins from the past 3 hours have been found!",
+        data: checkins
+      });
     });
   });
 };
