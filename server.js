@@ -9,6 +9,7 @@ var authController = require('./controllers/auth');
 var userController = require('./controllers/user');
 var coffeeShopController = require('./controllers/coffeeShop');
 var checkinController = require('./controllers/checkin');
+var indexController = require('./controllers/index');
 
 // Config
 var config = require('./config.json');
@@ -35,12 +36,7 @@ app.use(bodyParser.urlencoded({
 var router = express.Router();
 
 // Test views
-app.get('/', function(req, res) {
-  res.render('index', {
-    title: "Coffee Crowds",
-    message: "Welcome to Coffee Crowds!"
-  });
-});
+app.get('/', indexController.index);
 
 // Define router endpoints
 router.route('/coffeeShops')
