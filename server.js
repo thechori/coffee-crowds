@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+// Set Promise provider to bluebird
+mongoose.Promise = require('bluebird');
+
 // Local files
 var authController = require('./controllers/auth');
 var userController = require('./controllers/user');

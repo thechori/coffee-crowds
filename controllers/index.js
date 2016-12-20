@@ -1,8 +1,15 @@
-
+var CoffeeShop = require('../models/coffeeShop');
 
 exports.index = (req, res) => {
-  res.render('index', {
-    'title': 'Coffee Crowds',
-    'message': 'Welcome to COFFEE CROWDS!!'
-  })
+  // Grab all CoffeeShops
+  CoffeeShop.find(function(err, coffeeShops) {
+    if (err) { return res.send(err); }
+
+    // Render
+    res.render('index', {
+      'title': 'Coffee Crowds',
+      'message': 'Welcome to COFFEE CROWDS!!',
+      'coffeeShops': coffeeShops
+    });
+  });
 };

@@ -3,3 +3,8 @@ html
     title= title
   body
     h1= message
+    ul
+      each coffeeShop in coffeeShops
+        li= coffeeShop.name
+      else
+        li= "No coffee shops found.."
