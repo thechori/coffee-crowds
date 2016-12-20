@@ -19,14 +19,18 @@ Web application that utilizes user input to track which coffee shops are busy ar
 ```
 3. View application running at http://localhost:3000
 
-## Slogans
-"Stop guessing where to go to enjoy that cup of coffee"
-
-"Because nobody enjoys driving around trying to find a place to enjoy their coffee"
-
 ## TODO
 - Build simple UI for web interaction
 
 ## Completed Items
 - Set up RESTful API (Users, CoffeeShops, Checkins)
 - Set up domain on DigitalOcean VPS as a virtual host
+
+## Slogans
+"Stop guessing where to go to enjoy that cup of coffee"
+
+"Because nobody enjoys driving around trying to find a place to enjoy their coffee"
+
+"Less searching, more sipping"
+
+"Stop wasting time and find a place to work/study"
