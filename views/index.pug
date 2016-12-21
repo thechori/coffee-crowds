@@ -1,10 +1,18 @@
 html
   head
     title= title
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
   body
-    h1= message
-    ul
-      each coffeeShop in coffeeShops
-        li= coffeeShop.name
-      else
-        li= "No coffee shops found.."
+    div(class="container")
+      h1= message
+      br
+      ul(class='')
+        each coffeeShop in coffeeShops
+          li= coffeeShop.name
+        else
+          li= "No coffee shops found.."
+      br
+      button(class='btn-info') Login
+      br
+      br
+      button(class='btn-danger') Logout

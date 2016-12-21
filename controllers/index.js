@@ -8,7 +8,7 @@ exports.index = (req, res) => {
     // Render
     res.render('index', {
       'title': 'Coffee Crowds',
-      'message': 'Welcome to COFFEE CROWDS!!',
+      'message': 'Coffee Shops',
       'coffeeShops': coffeeShops
     });
   });

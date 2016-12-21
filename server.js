@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({
 // Create the Express router
 var router = express.Router();
 
-// Test views
+// Index endpoint
 app.get('/', indexController.index);
 
 // Define router endpoints
