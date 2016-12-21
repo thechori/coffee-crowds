@@ -2,7 +2,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var path = require('path');
 var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+// Development
+var logger = require('morgan');
 
 // Set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
@@ -30,10 +36,17 @@ var app = express();
 // Set view engine
 app.set('view engine', 'pug');
 
-// Use body-parser
-app.use(bodyParser.urlencoded({
-  extended: true
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(require('express-session')({
+  secret: 'loveislove',
+  resave: false,
+  saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Create the Express router
 var router = express.Router();
