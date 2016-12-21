@@ -6,9 +6,13 @@ var cookieParser = require('cookie-parser');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 // Development
 var logger = require('morgan');
+
+// Config
+var configDB = require('./config/database');
 
 // Set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
@@ -20,11 +24,8 @@ var coffeeShopController = require('./controllers/coffeeShop');
 var checkinController = require('./controllers/checkin');
 var indexController = require('./controllers/index');
 
-// Config
-var config = require('./config.json');
-
 // Connect to DB
-var mongo_url = config.mongo_url || process.env.MONGO_URL;
+var mongo_url = configDB.mongo_url || process.env.MONGO_URL;
 mongoose.connect(mongo_url, function(err) {
   if (err)
     return console.log(err);
