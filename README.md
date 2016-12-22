@@ -32,6 +32,8 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 
 ## Enhancements
 - Price ratings ($-$$$$)
+- Ability for User to flag an inaccurate Checkin or malicious User
+- Admin functionality on the front end
 
 ## Slogans
 "Stop guessing where to go to enjoy that cup of coffee"
