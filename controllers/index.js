@@ -16,7 +16,7 @@ exports.index = (req, res) => {
 
 exports.login = (req, res) => {
   res.render('login', {
-    // 'title': 'Login Page~',
+    'title': 'Login Page~',
     'message': 'WELCOME TO THE LOGIN PAGE'
   });
 };
