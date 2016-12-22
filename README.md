@@ -4,7 +4,6 @@ Web application that utilizes user input to track which coffee shops are busy ar
 ## Prerequisites
 - Node.js
 - nodemon
-- ???
 
 ## Installation
 1. Grab the source code from GitLab
@@ -25,6 +24,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 
 ## TODO
 - Build simple UI for web interaction
+- Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
 
 ## Completed Items
 - Set up RESTful API (Users, CoffeeShops, Checkins)
