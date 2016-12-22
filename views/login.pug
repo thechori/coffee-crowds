@@ -4,7 +4,7 @@ block title
   title #{title}
 
 block content
-  form(id='login-form', style='border: 1px solid black; padding: 20px;')
+  form(id='login-form', action='/loginz', method='post')
     input(type='email', name='email',)
     br
     input(type='password',name='password')
@@ -12,6 +12,6 @@ block content
     button(type='submit') login
     br
 
-    div(id='login-errors', style='display: none;')
+    div(id='login-errors')
       h3 errors
       p(id='items')
