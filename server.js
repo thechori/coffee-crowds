@@ -53,6 +53,7 @@ app.use(flash());
 // Create the Express router
 var router = express.Router();
 
+require('./config/passport')(passport);
 require('./routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
 
 // Define router endpoints
