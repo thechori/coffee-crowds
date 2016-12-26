@@ -7,7 +7,6 @@ var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
-var session = require('express-session');
 
 // Development
 var logger = require('morgan');
@@ -45,16 +44,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Passport
-app.use(session({ secret: "loveislove" })); // session secret
+app.use(require('express-session')({
+  secret: 'pokemon1',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+require('./routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
+
 
 // Create the Express router
 var router = express.Router();
-
-require('./config/passport')(passport);
-require('./routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
 
 // Define router endpoints
 router.route('/coffeeShops')

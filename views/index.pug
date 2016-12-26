@@ -9,7 +9,7 @@ block content
     else
       li= "No coffee shops found.."
   br
-  button(class='btn-info') Login
-  br
-  br
-  button(class='btn-danger') Logout
+  if (!user)
+    button(class='btn-info') Login
+  if (user)
+    button(class='btn-danger') Logout

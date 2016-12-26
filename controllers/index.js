@@ -22,5 +22,6 @@ exports.showLoginPage = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  return res.send(req.body);
+  // return res.send(req.body);
+  res.redirect('/');
 };

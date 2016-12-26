@@ -23,6 +23,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 3. View application running at http://localhost:3000
 
 ## TODO
+- User sessions (login/logout)
 - Build simple UI for web interaction
 - Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
 
