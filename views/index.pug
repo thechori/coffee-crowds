@@ -10,6 +10,8 @@ block content
       li= "No coffee shops found.."
   br
   if (!user)
-    button(class='btn-info') Login
+    a(href='/login')
+      button(class='btn-info') Login
   if (user)
-    button(class='btn-danger') Logout
+    a(href='/logout')
+      button(class='btn-danger') Logout

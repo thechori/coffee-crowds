@@ -1,4 +1,6 @@
 var indexController = require('./controllers/index');
+var User = require('./models/user');
+var passport = require('passport');
 
 module.exports = function(app, passport) {
   app.get('/', indexController.index);
@@ -6,11 +8,18 @@ module.exports = function(app, passport) {
   app.get('/login', isLoggedIn, indexController.showLoginPage);
   app.post('/login', passport.authenticate('local'), indexController.login);
 
-  app.post('/register', passport.authenticate('local-signup', {
-    successRedirect: '/',
-    failureRedirect: '/register',
-    failureFlash: true
-  }));
+  app.get('/register', isLoggedIn, function(req, res) {
+    res.render('register');
+  });
+  app.post('/register', function(req, res) {
+    User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
+      if (err) { return res.send(err); }
+
+      passport.authenticate('local')(req, res, function() {
+        res.redirect('/');
+      });
+    });
+  });
 
   // Utilizes the isLoggedIn middlware function to ensure that
   // the User is logged in before accessing this page
@@ -28,6 +37,8 @@ module.exports = function(app, passport) {
 
 // Route middleware to ensure a User is logged in
 function isLoggedIn(req, res, next) {
+  console.log('isLoggedIn middleware');
+
   if (req.isAuthenticated) {
     return next();
   } else {
