@@ -5,7 +5,7 @@ var passport = require('passport');
 module.exports = function(app, passport) {
   app.get('/', indexController.index);
 
-  app.get('/login', isLoggedIn, indexController.showLoginPage);
+  app.get('/login', indexController.showLoginPage);
   app.post('/login', passport.authenticate('local'), indexController.login);
 
   app.get('/register', isLoggedIn, function(req, res) {
@@ -37,11 +37,11 @@ module.exports = function(app, passport) {
 
 // Route middleware to ensure a User is logged in
 function isLoggedIn(req, res, next) {
-  console.log('isLoggedIn middleware');
+  console.log("isLoggedIn");
 
-  if (req.isAuthenticated) {
+  if (req.isAuthenticated()) {
     return next();
-  } else {
-    return redirect('/login');
   }
+
+  res.redirect('/login');
 }
