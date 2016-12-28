@@ -1,6 +1,8 @@
 // Packages
 var express = require('express');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var path = require('path');
@@ -8,11 +10,13 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var dotenv = require('dotenv');
+var expressValidator = require('express-validator');
+
 
 // Development
 var logger = require('morgan');
 
-// Set Promise provider to bluebird
+// Set Promise provider to bluebird -- THIS MAY CONFLICT WITH HACKATHON-STARTER CODE
 mongoose.Promise = require('bluebird');
 
 // Local files
@@ -28,10 +32,10 @@ var indexController = require('./controllers/index');
 dotenv.load({ path: '.env' });
 
 // Connect to DB
-var mongo_url = process.env.MONGOLAB_URI;
-mongoose.connect(mongo_url, function(err) {
-  if (err)
-    return console.log(err);
+mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connection.on('error', () => {
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  process.exit();
 });
 
 // Initialize the app
@@ -41,16 +45,20 @@ var app = express();
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use(bodyParser());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Passport
-app.use(require('express-session')({
-  secret: 'pokemon1',
-  resave: false,
-  saveUninitialized: false
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGOLAB_URI,
+    autoReconnect: true
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -90,41 +98,39 @@ router.route('/checkins/:checkinId')
 router.route('/mycheckins')
   .get(authController.isAuthenticated, checkinController.getMyCheckins)
 
-// From routes.js
-  app.get('/', indexController.index);
-
-  app.get('/login', indexController.showLoginPage);
-  app.post('/login', passport.authenticate('local'), indexController.login);
-
-  app.get('/register', isLoggedIn, function(req, res) {
-    res.render('register');
-  });
-  app.post('/register', function(req, res) {
-    User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
-      if (err) { return res.send(err); }
-
-      passport.authenticate('local')(req, res, function() {
-        res.redirect('/');
-      });
-    });
-  });
-// End from routes.js
-
-  // Utilizes the isLoggedIn middlware function to ensure that
-  // the User is logged in before accessing this page
-  app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile', {
-      user: req.user
-    });
-  });
-
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
-
-// Register the routes
+// Register the routes object
 app.use('/api', router);
+
+// From routes.js
+app.get('/', indexController.index);
+
+app.get('/login', userController.getLogin);
+app.post('/login', userController.postLogin);
+
+app.get('/register', function(req, res) {
+  res.render('register');
+});
+app.post('/register', function(req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
+    if (err) { return res.send(err); }
+
+    passport.authenticate('local')(req, res, function() {
+      res.redirect('/');
+    });
+  });
+});
+
+app.get('/profile', function(req, res) {
+  res.render('profile', {
+    user: req.user
+  });
+});
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+// End from routes.js
 
 // Start the server
 var port = process.env.PORT || 3000;

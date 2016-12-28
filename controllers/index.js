@@ -13,15 +13,3 @@ exports.index = (req, res) => {
     });
   });
 };
-
-exports.showLoginPage = (req, res) => {
-  res.render('login', {
-    'title': 'Login Page~',
-    'message': 'WELCOME TO THE LOGIN PAGE'
-  });
-};
-
-exports.login = (req, res) => {
-  return res.send(req.body);
-  // res.redirect('/');
-};
