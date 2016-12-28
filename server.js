@@ -7,12 +7,10 @@ var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
+var dotenv = require('dotenv');
 
 // Development
 var logger = require('morgan');
-
-// Config
-var configDB = require('./config/database');
 
 // Set Promise provider to bluebird
 mongoose.Promise = require('bluebird');
@@ -24,8 +22,13 @@ var coffeeShopController = require('./controllers/coffeeShop');
 var checkinController = require('./controllers/checkin');
 var indexController = require('./controllers/index');
 
+/**
+ * Load environment variables from .env file, where API keys and passwords are configured.
+ */
+dotenv.load({ path: '.env' });
+
 // Connect to DB
-var mongo_url = configDB.mongo_url || process.env.MONGO_URL;
+var mongo_url = process.env.MONGOLAB_URI;
 mongoose.connect(mongo_url, function(err) {
   if (err)
     return console.log(err);
