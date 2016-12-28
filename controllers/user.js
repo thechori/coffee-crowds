@@ -59,9 +59,7 @@ exports.getRegister = (req, res) => {
   if (req.user) {
     return res.redirect('/');
   }
-  res.render('register', {
-    title: 'Register'
-  });
+  res.render('register');
 };
 
 exports.postRegister = (req, res, next) => {
@@ -171,8 +169,20 @@ exports.putUserById = function(req, res) {
 };
 
 exports.getProfile = (req, res) => {
-  res.render('profile', {
-    user: req.user
+  res.render('profile');
+};
+
+exports.getProfileEdit = (req, res) => {
+  res.render('profileEdit');
+};
+
+exports.postProfileEdit = (req, res) => {
+  // Find User
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) { return res.send(err); }
+    console.log(user);
+    console.log(req.body);
+    // user.profile.name =
   });
 };
 
