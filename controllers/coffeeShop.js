@@ -34,8 +34,15 @@ exports.getCoffeeShop = (req, res) => {
   // Find the CoffeeShop
   CoffeeShop.findOne({ _id: req.params.coffeeShopId }, (err, coffeeShop) => {
     if (err) { return res.send(err); }
-    res.render('coffeeShop', {
-      coffeeShop: coffeeShop
+
+    // Find the Checkins for the CoffeeShop
+    Checkin.find({ coffeeShopId: req.params.coffeeShopId }, (err, checkins) => {
+      if (err) { return res.send(err); }
+
+      res.render('coffeeShop', {
+        coffeeShop: coffeeShop,
+        checkins: checkins
+      });
     });
   });
 };
