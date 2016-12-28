@@ -30,6 +30,17 @@ exports.postCoffeeShops = function(req, res) {
   });
 };
 
+exports.getCoffeeShop = (req, res) => {
+  // Find the CoffeeShop
+  CoffeeShop.findOne({ _id: req.params.coffeeShopId }, (err, coffeeShop) => {
+    if (err) { return res.send(err); }
+    res.render('coffeeShop', {
+      coffeeShop: coffeeShop
+    });
+  });
+};
+
+// FOR API
 exports.getCoffeeShopById = function(req, res) {
   CoffeeShop.find({
     _id: req.params.coffeeShopId,

@@ -120,6 +120,8 @@ app.get('/profile', userController.isAuthenticated, userController.getProfile);
 app.get('/profile/edit', userController.isAuthenticated, userController.getProfileEdit);
 app.post('/profile/edit', userController.isAuthenticated, userController.postProfileEdit);
 app.get('/logout', userController.logout);
+
+app.get('/coffeeShop/:coffeeShopId', coffeeShopController.getCoffeeShop);
 // End from routes.js
 
 // Start the server

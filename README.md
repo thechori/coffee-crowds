@@ -23,7 +23,6 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 3. View application running at http://localhost:3000
 
 ## TODO
-- User sessions (login/logout)
 - Add rating to CoffeeShop schema (or Checkin schema?)
 - Build simple UI for web interaction
 - Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
@@ -31,6 +30,8 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 ## Completed Items
 - Set up RESTful API (Users, CoffeeShops, Checkins)
 - Set up domain on DigitalOcean VPS as a virtual host
+- User sessions (login/logout)
+
 
 ## Enhancements
 - Price ratings ($-$$$$)

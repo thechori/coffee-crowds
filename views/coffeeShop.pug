@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Coffee Shop Information
+  p Name: #{coffeeShop.name}
+  p User Id: #{coffeeShop.userId}
+  p Address: #{coffeeShop.address}
+  br
+  br
+  h2 Checkins
+  if checkins
+    ul
+      each checkin in checkins
+        li
+          a(href='/checkin/' + checkin._id) Checkin ID: #{checkin._id}
+  else
+    p No Checkins
+
+  br
+  br
+  a(href='/') Back

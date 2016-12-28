@@ -11,7 +11,8 @@ block content
     p Welcome!
   ul(class='')
     each coffeeShop in coffeeShops
-      li= coffeeShop.name
+      li
+        a(href='/coffeeShop/' + coffeeShop._id) #{coffeeShop.name}
     else
       li= "No coffee shops found.."
   br
