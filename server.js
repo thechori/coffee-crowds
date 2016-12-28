@@ -116,7 +116,7 @@ app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/register', userController.getRegister);
 app.post('/register', userController.postRegister);
-app.get('/profile', userController.getProfile);
+app.get('/profile', userController.isAuthenticated, userController.getProfile);
 app.get('/logout', userController.logout);
 // End from routes.js
 

@@ -4,6 +4,13 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const User = require('../models/user');
 
+exports.isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+};
+
 exports.getLogin = (req, res) => {
   if (req.user) {
     // If the user is already logged in, redirect to the home page
