@@ -112,18 +112,8 @@ app.get('/', indexController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 
-app.get('/register', function(req, res) {
-  res.render('register');
-});
-app.post('/register', function(req, res) {
-  User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
-    if (err) { return res.send(err); }
-
-    passport.authenticate('local')(req, res, function() {
-      res.redirect('/');
-    });
-  });
-});
+app.get('/register', userController.getRegister);
+app.post('/register', userController.postRegister);
 
 app.get('/profile', function(req, res) {
   res.render('profile', {

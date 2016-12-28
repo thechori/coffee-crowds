@@ -20,16 +20,16 @@ exports.getLogin = (req, res) => {
  * Sign in using email and password.
  */
 exports.postLogin = (req, res, next) => {
-  // req.assert('email', 'Email is not valid').isEmail();
-  // req.assert('password', 'Password cannot be blank').notEmpty();
-  // req.sanitize('email').normalizeEmail({ remove_dots: false });
+  req.assert('email', 'Email is not valid').isEmail();
+  req.assert('password', 'Password cannot be blank').notEmpty();
+  req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  // const errors = req.validationErrors();
+  const errors = req.validationErrors();
 
-  // if (errors) {
-  //   req.flash('errors', errors);
-  //   return res.redirect('/login');
-  // }
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/login');
+  }
 
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }
@@ -43,6 +43,40 @@ exports.postLogin = (req, res, next) => {
       res.redirect(req.session.returnTo || '/');
     });
   })(req, res, next);
+};
+
+exports.getRegister = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('register', {
+    title: 'Register'
+  });
+};
+
+exports.postRegister = (req, res, next) => {
+
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email
+  });
+
+  User.findOne({ username: req.body.username }, (err, existingUser) => {
+    if (err) { return next(err); }
+    if (existingUser) {
+      req.flash('error', { msg: 'Account with that username already exists..' });
+      return res.redirect('/register');
+    }
+
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(user, (err) => {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+    });
+  });
 };
 
 exports.getUsers = function(req, res) {
