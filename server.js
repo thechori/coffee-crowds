@@ -55,8 +55,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-require('./routes.js')(app, passport); // Load routes and pass in our app and fully configured passport
-
 
 // Create the Express router
 var router = express.Router();
@@ -91,6 +89,39 @@ router.route('/checkins/:checkinId')
 
 router.route('/mycheckins')
   .get(authController.isAuthenticated, checkinController.getMyCheckins)
+
+// From routes.js
+  app.get('/', indexController.index);
+
+  app.get('/login', indexController.showLoginPage);
+  app.post('/login', passport.authenticate('local'), indexController.login);
+
+  app.get('/register', isLoggedIn, function(req, res) {
+    res.render('register');
+  });
+  app.post('/register', function(req, res) {
+    User.register(new User({ username: req.body.username }), req.body.password, function(err, account) {
+      if (err) { return res.send(err); }
+
+      passport.authenticate('local')(req, res, function() {
+        res.redirect('/');
+      });
+    });
+  });
+// End from routes.js
+
+  // Utilizes the isLoggedIn middlware function to ensure that
+  // the User is logged in before accessing this page
+  app.get('/profile', isLoggedIn, function(req, res) {
+    res.render('profile', {
+      user: req.user
+    });
+  });
+
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
 
 // Register the routes
 app.use('/api', router);
