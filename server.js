@@ -122,6 +122,7 @@ app.post('/profile/edit', userController.isAuthenticated, userController.postPro
 app.get('/logout', userController.logout);
 
 app.get('/coffeeShop/:coffeeShopId', coffeeShopController.getCoffeeShop);
+app.get('/checkin/:checkinId', checkinController.getCheckin);
 // End from routes.js
 
 // Start the server

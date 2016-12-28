@@ -31,6 +31,15 @@ exports.getMyCheckins = function(req, res) {
   });
 };
 
+exports.getCheckin = (req, res) => {
+  Checkin.findOne({ _id: req.params.checkinId }, (err, checkin) => {
+    if (err) { return res.send(err); }
+    res.render('checkin', {
+      checkin: checkin
+    });
+  });
+};
+
 exports.getCheckins = function(req, res) {
   Checkin.find(function(err, checkins) {
     if (err) { return res.send(err); }
