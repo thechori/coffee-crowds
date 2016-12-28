@@ -180,9 +180,35 @@ exports.postProfileEdit = (req, res) => {
   // Find User
   User.findOne({ _id: req.user._id }, (err, user) => {
     if (err) { return res.send(err); }
-    console.log(user);
-    console.log(req.body);
-    // user.profile.name =
+
+    // Only change values that were supplied
+    if (req.body.username) {
+      user.username = req.body.username;
+    }
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
+    if (req.body.name) {
+      user.profile.name = req.body.name;
+    }
+    if (req.body.location) {
+      user.profile.location = req.body.location;
+    }
+    if (req.body.website) {
+      user.profile.website = req.body.website;
+    }
+    if (req.body.bio) {
+      user.profile.bio = req.body.bio;
+    }
+
+    user.save((err) => {
+      if (err) { return res.send(err); }
+      console.log("Successfully updated profile!");
+      res.redirect('/profile');
+    });
   });
 };
 

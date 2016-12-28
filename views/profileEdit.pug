@@ -3,12 +3,13 @@ extends layout
 block content
   h1 Edit Profile
   form(id='profile-edit-form', action='/profile/edit', method='post')
+    p Account Information
     input(type='text', name='username', placeholder=user.username || 'Username')
     br
     input(type='password',name='password', placeholder='Password')
     br
-    input(type='password',name='password-confirmation', placeholder='Confirm Password')
-    br
+    //- input(type='password',name='password-confirmation', placeholder='Confirm Password')
+    //- br
     input(type='email', name='email', placeholder=user.email || 'E-mail')
 
     br
@@ -20,8 +21,6 @@ block content
     br
     br
 
-
-
     p Personal Information
     input(type='text', name='name', placeholder=user.profile.name || "Name")
     br
@@ -30,11 +29,13 @@ block content
     input(type='text', name='website', placeholder=user.profile.website || 'Website')
     br
     textarea(name='bio', placeholder=user.profile.bio || 'Bio')
+    //- Removing for now
+      br
+      select(name='gender')
+        option(value='') Select a Gender
+        option(value='female') Female
+        option(value='male') Male
     br
-    select(name='gender')
-      option(value='') Select a Gender
-      option(value='female') Female
-      option(value='male') Male
     br
     br
     button(type='submit') Save Changes
