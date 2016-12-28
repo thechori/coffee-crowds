@@ -160,6 +160,17 @@ exports.putUserById = function(req, res) {
   });
 };
 
+exports.getProfile = (req, res) => {
+  res.render('profile', {
+    user: req.user
+  });
+};
+
+exports.logout = (req, res) => {
+  req.logout();
+  res.redirect('/');
+};
+
 exports.deleteUserById = function(req, res) {
   User.remove({
     _id: req.params.userId

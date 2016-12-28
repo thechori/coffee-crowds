@@ -108,23 +108,12 @@ app.use('/api', router);
 
 // From routes.js
 app.get('/', indexController.index);
-
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
-
 app.get('/register', userController.getRegister);
 app.post('/register', userController.postRegister);
-
-app.get('/profile', function(req, res) {
-  res.render('profile', {
-    user: req.user
-  });
-});
-
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
+app.get('/profile', userController.getProfile);
+app.get('/logout', userController.logout);
 // End from routes.js
 
 // Start the server
