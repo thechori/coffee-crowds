@@ -20,16 +20,16 @@ exports.getLogin = (req, res) => {
  * Sign in using email and password.
  */
 exports.postLogin = (req, res, next) => {
-  req.assert('email', 'Email is not valid').isEmail();
-  req.assert('password', 'Password cannot be blank').notEmpty();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
+  // req.assert('email', 'Email is not valid').isEmail();
+  // req.assert('password', 'Password cannot be blank').notEmpty();
+  // req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-  const errors = req.validationErrors();
+  // const errors = req.validationErrors();
 
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/login');
-  }
+  // if (errors) {
+  //   req.flash('errors', errors);
+  //   return res.redirect('/login');
+  // }
 
   passport.authenticate('local', (err, user, info) => {
     if (err) { return next(err); }

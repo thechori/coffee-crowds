@@ -51,6 +51,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Passport
+/**
+ * API keys and Passport configuration.
+ */
+const passportConfig = require('./config/passport');
+
 app.use(session({
   resave: true,
   saveUninitialized: true,
