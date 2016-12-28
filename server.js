@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var flash = require('connect-flash');
 var dotenv = require('dotenv');
 var expressValidator = require('express-validator');
-
+var chalk = require('chalk');
 
 // Development
 var logger = require('morgan');
@@ -68,6 +68,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 // Create the Express router
 var router = express.Router();

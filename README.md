@@ -24,6 +24,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 
 ## TODO
 - User sessions (login/logout)
+- Add rating to CoffeeShop schema (or Checkin schema?)
 - Build simple UI for web interaction
 - Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
 

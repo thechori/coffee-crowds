@@ -2,7 +2,13 @@ extends layout.pug
 
 block content
   h1= message
-  br
+  if user
+    if user.profile.name
+      p Welcome #{user.profile.name}.
+    else
+      p Welcome unnamed person.
+  else
+    p Welcome!
   ul(class='')
     each coffeeShop in coffeeShops
       li= coffeeShop.name
