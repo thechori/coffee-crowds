@@ -47,6 +47,10 @@ exports.getCoffeeShop = (req, res) => {
   });
 };
 
+exports.getNewCoffeeShop = (req, res) => {
+  res.render('/coffeeShopNew');
+};
+
 // FOR API
 exports.getCoffeeShopById = function(req, res) {
   CoffeeShop.find({

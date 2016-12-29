@@ -40,6 +40,11 @@ exports.getCheckin = (req, res) => {
   });
 };
 
+exports.getNewCheckin = (req, res) => {
+  res.render('checkinNew');
+};
+
+// FOR API
 exports.getCheckins = function(req, res) {
   Checkin.find(function(err, checkins) {
     if (err) { return res.send(err); }
