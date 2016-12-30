@@ -48,11 +48,21 @@ exports.getCoffeeShop = (req, res) => {
 };
 
 exports.getNewCoffeeShop = (req, res) => {
-  res.render('/coffeeShopNew');
+  res.render('coffeeShopNew');
 };
 
 exports.postNewCoffeeShop = (req, res) => {
-  return res.send('postNewCoffeeShop');
+
+  let coffeeShop = new CoffeeShop({
+    userId: req.user._id,
+    name: req.body.name,
+    address: req.body.address
+  });
+
+  coffeeShop.save((err) => {
+    if (err) { return res.send(err); }
+    return res.redirect('/coffeeShop/' + coffeeShop._id);
+  });
 };
 
 // FOR API
