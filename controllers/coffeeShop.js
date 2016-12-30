@@ -51,6 +51,10 @@ exports.getNewCoffeeShop = (req, res) => {
   res.render('/coffeeShopNew');
 };
 
+exports.postNewCoffeeShop = (req, res) => {
+  return res.send('postNewCoffeeShop');
+};
+
 // FOR API
 exports.getCoffeeShopById = function(req, res) {
   CoffeeShop.find({

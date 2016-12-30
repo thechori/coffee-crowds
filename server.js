@@ -125,7 +125,9 @@ app.get('/coffeeShop/:coffeeShopId', coffeeShopController.getCoffeeShop);
 app.get('/checkin/:checkinId', checkinController.getCheckin);
 
 app.get('/newCoffeeShop', coffeeShopController.getNewCoffeeShop);
+app.post('/newCoffeeShop', coffeeShopController.postNewCoffeeShop);
 app.get('/newCheckin', checkinController.getNewCheckin);
+app.post('/newCheckin', checkinController.postNewCheckin);
 // End from routes.js
 
 // Start the server

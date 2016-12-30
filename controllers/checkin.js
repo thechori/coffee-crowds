@@ -52,6 +52,24 @@ exports.getNewCheckin = (req, res) => {
   });
 };
 
+exports.postNewCheckin = (req, res) => {
+  // return res.send(req.body); // works
+  // return res.send(req.user._id); // works
+
+
+  var checkin = new Checkin({
+    userId: req.user._id,
+    coffeeShopId: req.body.coffeeShopId,
+    crowdRating: req.body.crowdRating,
+    comment: req.body.comment
+  });
+
+  checkin.save((err) => {
+    if (err) { return res.send(err); }
+    res.redirect('/checkin/' + checkin._id);
+  });
+};
+
 // FOR API
 exports.getCheckins = function(req, res) {
   Checkin.find(function(err, checkins) {
