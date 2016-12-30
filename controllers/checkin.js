@@ -1,4 +1,5 @@
 var Checkin = require('../models/checkin');
+var CoffeeShop = require('../models/coffeeShop');
 
 exports.postCheckins = function(req, res) {
   var checkin = new Checkin();
@@ -41,7 +42,14 @@ exports.getCheckin = (req, res) => {
 };
 
 exports.getNewCheckin = (req, res) => {
-  res.render('checkinNew');
+  // Grab the CoffeeShops for the dropdown menu
+  CoffeeShop.find((err, coffeeShops) => {
+    if (err) { return res.send(err); }
+    res.render('checkinNew', {
+      title: 'New Checkin',
+      coffeeShops: coffeeShops
+    });
+  });
 };
 
 // FOR API

@@ -124,8 +124,8 @@ app.get('/logout', userController.logout);
 app.get('/coffeeShop/:coffeeShopId', coffeeShopController.getCoffeeShop);
 app.get('/checkin/:checkinId', checkinController.getCheckin);
 
-app.get('/new-coffeeShop', coffeeShopController.getNewCoffeeShop);
-app.get('/new-checkin', checkinController.getNewCheckin);
+app.get('/newCoffeeShop', coffeeShopController.getNewCoffeeShop);
+app.get('/newCheckin', checkinController.getNewCheckin);
 // End from routes.js
 
 // Start the server
