@@ -52,6 +52,18 @@ exports.getNewCheckin = (req, res) => {
   });
 };
 
+exports.getNewCheckinWithId = (req, res) => {
+  // Grab the CoffeeShops for the dropdown menu
+  CoffeeShop.find((err, coffeeShops) => {
+    if (err) { return res.send(err); }
+    res.render('checkinNew', {
+      title: 'New Checkin',
+      coffeeShops: coffeeShops,
+      coffeeShopId: req.params.coffeeShopId
+    });
+  });
+};
+
 exports.postNewCheckin = (req, res) => {
   // return res.send(req.body); // works
   // return res.send(req.user._id); // works

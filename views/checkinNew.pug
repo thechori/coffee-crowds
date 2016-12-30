@@ -7,7 +7,10 @@ block content
     select(name='coffeeShopId')
       option(value='')
       each coffeeShop in coffeeShops
-        option(value=coffeeShop._id) #{coffeeShop.name}
+        if coffeeShopId == coffeeShop._id
+          option(value=coffeeShop._id, selected='true') #{coffeeShop.name}
+        else
+          option(value=coffeeShop._id) #{coffeeShop.name}
     br
     br
     p Rate the crowd:

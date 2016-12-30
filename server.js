@@ -127,6 +127,7 @@ app.get('/checkin/:checkinId', checkinController.getCheckin);
 app.get('/newCoffeeShop', coffeeShopController.getNewCoffeeShop);
 app.post('/newCoffeeShop', coffeeShopController.postNewCoffeeShop);
 app.get('/newCheckin', checkinController.getNewCheckin);
+app.get('/newCheckin/:coffeeShopId', checkinController.getNewCheckinWithId);
 app.post('/newCheckin', checkinController.postNewCheckin);
 // End from routes.js
 
