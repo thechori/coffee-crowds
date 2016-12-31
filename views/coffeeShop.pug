@@ -6,8 +6,9 @@ block content
   p User Id: #{coffeeShop.userId}
   p Address: #{coffeeShop.address}
   br
-  a(href='/newCheckin/' + coffeeShop._id) Checkin Here
-  br
+  if (user)
+    a(href='/newCheckin/' + coffeeShop._id) Checkin Here
+    br
   h2 Checkins
   if checkins
     ul

@@ -36,6 +36,8 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 - Price ratings ($-$$$$)
 - Ability for User to flag an inaccurate Checkin or malicious User
 - Admin functionality on the front end
+- Approval process for new CoffeeShops
+- Prevent duplicate CoffeeShop creation
 
 ## Slogans
 "Stop guessing where to go to enjoy that cup of coffee"
@@ -45,3 +47,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 "Less searching, more sipping"
 
 "Stop wasting time and find a place to work/study"
+
+## Existing Competition
+- Google Search provides "Popular times" which illustrate how busy businesses *USUALLY* are. What are they basing this information on?
+  - Based on anonymous GPS data from users

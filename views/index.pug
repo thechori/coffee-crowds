@@ -20,8 +20,13 @@ block content
     a(href='/login')
       button(class='btn-info') Login
   if (user)
-    a(href='/profile') My Profile #[a(href='/newCheckin') New Checkin] #[a(href='/newCoffeeShop') New Coffee Shop]
+    a(href='/profile') My Profile
     br
+    a(href='/newCheckin') New Checkin
+    br
+    if (user.isAdmin)
+      a(href='/newCoffeeShop') New Coffee Shop
+      br
     br
     a(href='/logout')
       button(class='btn-danger') Logout

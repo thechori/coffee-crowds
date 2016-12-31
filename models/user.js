@@ -19,6 +19,9 @@ var userSchema = new mongoose.Schema({
     type: String,
     unique: true
   },
+  isAdmin: {
+    type: Boolean
+  },
 
   facebook: String,
   twitter: String,

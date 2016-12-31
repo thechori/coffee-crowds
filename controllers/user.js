@@ -67,7 +67,8 @@ exports.postRegister = (req, res, next) => {
   const user = new User({
     username: req.body.username,
     password: req.body.password,
-    email: req.body.email
+    email: req.body.email,
+    isAdmin: false
   });
 
   User.findOne({ username: req.body.username }, (err, existingUser) => {
