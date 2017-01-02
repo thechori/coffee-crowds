@@ -30,6 +30,42 @@ exports.postCoffeeShops = function(req, res) {
   });
 };
 
+exports.getCoffeeShop = (req, res) => {
+  // Find the CoffeeShop
+  CoffeeShop.findOne({ _id: req.params.coffeeShopId }, (err, coffeeShop) => {
+    if (err) { return res.send(err); }
+
+    // Find the Checkins for the CoffeeShop
+    Checkin.find({ coffeeShopId: req.params.coffeeShopId }, (err, checkins) => {
+      if (err) { return res.send(err); }
+
+      res.render('coffeeShop', {
+        coffeeShop: coffeeShop,
+        checkins: checkins
+      });
+    });
+  });
+};
+
+exports.getNewCoffeeShop = (req, res) => {
+  res.render('coffeeShopNew');
+};
+
+exports.postNewCoffeeShop = (req, res) => {
+
+  let coffeeShop = new CoffeeShop({
+    userId: req.user._id,
+    name: req.body.name,
+    address: req.body.address
+  });
+
+  coffeeShop.save((err) => {
+    if (err) { return res.send(err); }
+    return res.redirect('/coffeeShop/' + coffeeShop._id);
+  });
+};
+
+// FOR API
 exports.getCoffeeShopById = function(req, res) {
   CoffeeShop.find({
     _id: req.params.coffeeShopId,

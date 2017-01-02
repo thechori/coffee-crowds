@@ -1,0 +1,21 @@
+extends layout.pug
+
+block title
+  title #{title}
+
+block content
+  h1 #{message}
+  form(id='login-form', action='/login', method='post')
+    input(type='text', name='username', placeholder='Username')
+    br
+    input(type='password',name='password', placeholder='Password')
+    br
+    button(type='submit') login
+    br
+
+    div(id='login-errors')
+      h3 errors
+      p(id='items')
+  br
+  br
+  a(href='/register') Don't have an account?

@@ -1,4 +1,5 @@
 var Checkin = require('../models/checkin');
+var CoffeeShop = require('../models/coffeeShop');
 
 exports.postCheckins = function(req, res) {
   var checkin = new Checkin();
@@ -31,6 +32,57 @@ exports.getMyCheckins = function(req, res) {
   });
 };
 
+exports.getCheckin = (req, res) => {
+  Checkin.findOne({ _id: req.params.checkinId }, (err, checkin) => {
+    if (err) { return res.send(err); }
+    res.render('checkin', {
+      checkin: checkin
+    });
+  });
+};
+
+exports.getNewCheckin = (req, res) => {
+  // Grab the CoffeeShops for the dropdown menu
+  CoffeeShop.find((err, coffeeShops) => {
+    if (err) { return res.send(err); }
+    res.render('checkinNew', {
+      title: 'New Checkin',
+      coffeeShops: coffeeShops
+    });
+  });
+};
+
+exports.getNewCheckinWithId = (req, res) => {
+  // Grab the CoffeeShops for the dropdown menu
+  CoffeeShop.find((err, coffeeShops) => {
+    if (err) { return res.send(err); }
+    res.render('checkinNew', {
+      title: 'New Checkin',
+      coffeeShops: coffeeShops,
+      coffeeShopId: req.params.coffeeShopId
+    });
+  });
+};
+
+exports.postNewCheckin = (req, res) => {
+  // return res.send(req.body); // works
+  // return res.send(req.user._id); // works
+
+
+  var checkin = new Checkin({
+    userId: req.user._id,
+    coffeeShopId: req.body.coffeeShopId,
+    crowdRating: req.body.crowdRating,
+    comment: req.body.comment
+  });
+
+  checkin.save((err) => {
+    if (err) { return res.send(err); }
+    res.redirect('/checkin/' + checkin._id);
+  });
+};
+
+// FOR API
 exports.getCheckins = function(req, res) {
   Checkin.find(function(err, checkins) {
     if (err) { return res.send(err); }

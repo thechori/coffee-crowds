@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Checkin Information
+  p ID: #{checkin._id}
+  p Date Created: #{checkin.createdAt}
+  p User ID: #{checkin.userId}
+  p Coffee Shop ID: #{checkin.coffeeShopId}
+  p Crowd Rating: #{checkin.crowdRating}
+  p Comment: #{checkin.comment}
+  br
+  a(href='/coffeeShop/' + checkin.coffeeShopId) Back to Coffee Shop

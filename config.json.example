@@ -1,3 +1,0 @@
-{
-  "mongo_url": "mongodb://<user>:<password>@<url>:<port>/<db>",
-}

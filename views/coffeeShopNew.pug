@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 New Coffee Shop
+  form(id='new-coffeeShop-form', action='/newCoffeeShop', method='post')
+    p Name:
+    input(type='text', name='name', placeholder='name')
+    br
+    br
+    p Address:
+    input(type='text', name='address', placeholder='address')
+    br
+    br
+    input(type='submit', value='Create Coffee Shop')
+  br
+  a(href='/') Back

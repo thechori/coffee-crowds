@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+  h1= message
+  if user
+    if user.profile.firstName
+      p Welcome #{user.profile.firstName}.
+    else
+      p Welcome unnamed person.
+  else
+    p Welcome!
+  ul(class='')
+    each coffeeShop in coffeeShops
+      li
+        a(href='/coffeeShop/' + coffeeShop._id) #{coffeeShop.name}
+    else
+      li= "No coffee shops found.."
+  br
+  if (!user)
+    a(href='/login')
+      button(class='btn-info') Login
+  if (user)
+    a(href='/profile') My Profile
+    br
+    a(href='/newCheckin') New Checkin
+    br
+    if (user.isAdmin)
+      a(href='/newCoffeeShop') New Coffee Shop
+      br
+    br
+    a(href='/logout')
+      button(class='btn-danger') Logout

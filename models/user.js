@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
+var crypto = require('crypto');
+var mongoose = require('mongoose');
 
-var UserSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
   username: {
     required: true,
     type: String,
@@ -11,46 +12,85 @@ var UserSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  nameFirst: String,
-  nameLast: String,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
   email: {
     required: true,
     type: String,
     unique: true
   },
-  bio: {
-    type: String,
-    max: 300
+  isAdmin: {
+    type: Boolean
+  },
+
+  facebook: String,
+  twitter: String,
+  google: String,
+  github: String,
+  instagram: String,
+  linkedin: String,
+  steam: String,
+  tokens: Array,
+
+  profile: {
+    firstName: String,
+    lastName: String,
+    gender: String,
+    location: String,
+    website: String,
+    picture: String,
+    bio: String
   }
 }, {
   timestamps: true
 });
 
-// Execute before each user.save() call
-UserSchema.pre('save', function(callback) {
-  var user = this;
-
-  // Break out if the password hasn't changed
-  if (!user.isModified('password')) return callback();
-
-  // Password changed so we need to hash it
-  bcrypt.genSalt(5, function(err, salt) {
-    if (err) return callback(err);
-
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
-      if (err) return callback(err);
+/**
+ * Password hash middleware.
+ */
+userSchema.pre('save', function save(next) {
+  const user = this;
+  if (!user.isModified('password')) { return next(); }
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) { return next(err); }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) { return next(err); }
       user.password = hash;
-      callback();
+      next();
     });
   });
 });
 
-UserSchema.methods.verifyPassword = function(password, callback) {
-  bcrypt.compare(password, this.password, function(err, isMatch) {
-    if (err) { return callback(err); }
-
-    callback(null, isMatch);
+/**
+ * Helper method for validating user's password.
+ */
+userSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    cb(err, isMatch);
   });
 };
 
-module.exports = mongoose.model('User', UserSchema);
+/**
+ * Helper method for getting user's gravatar.
+ */
+userSchema.methods.gravatar = function gravatar(size) {
+  if (!size) {
+    size = 200;
+  }
+  if (!this.email) {
+    return `https://gravatar.com/avatar/?s=${size}&d=retro`;
+  }
+  const md5 = crypto.createHash('md5').update(this.email).digest('hex');
+  return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
+};
+
+// FOR API USE
+userSchema.methods.verifyPassword = function(password, cb) {
+  bcrypt.compare(password, this.password, function(err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
+
+
+module.exports = mongoose.model('User', userSchema);
