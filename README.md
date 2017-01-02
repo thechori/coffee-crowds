@@ -39,6 +39,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 - Admin functionality on the front end
 - Approval process for new CoffeeShops
 - Prevent duplicate CoffeeShop creation
+- Integrate React for view rendering
 
 ## Slogans
 "Stop guessing where to go to enjoy that cup of coffee"
