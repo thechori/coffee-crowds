@@ -30,6 +30,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 - Set up RESTful API (Users, CoffeeShops, Checkins)
 - Set up domain on DigitalOcean VPS as a virtual host
 - User sessions (login/logout)
+- Replace "name" with "firstName" and "lastName" on User schema
 
 
 ## Enhancements

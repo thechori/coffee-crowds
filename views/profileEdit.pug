@@ -22,7 +22,9 @@ block content
     br
 
     p Personal Information
-    input(type='text', name='name', placeholder=user.profile.name || "Name")
+    input(type='text', name='firstName', placeholder=user.profile.firstName || "First Name")
+    br
+    input(type='text', name='lastName', placeholder=user.profile.lastName || "Last Name")
     br
     input(type='text', name='location', placeholder=user.profile.location || 'Location')
     br

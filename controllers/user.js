@@ -104,8 +104,8 @@ exports.postUsers = function(req, res) {
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    nameFirst: req.body.nameFirst,
-    nameLast: req.body.nameLast,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     bio: req.body.bio
   });
 
@@ -144,11 +144,11 @@ exports.putUserById = function(req, res) {
     if (req.body.password) {
       user.password = req.body.password;
     }
-    if (req.body.nameFirst) {
-      user.nameFirst = req.body.nameFirst;
+    if (req.body.firstName) {
+      user.profile.firstName = req.body.firstName;
     }
-    if (req.body.nameLast) {
-      user.nameLast = req.body.nameLast;
+    if (req.body.lastName) {
+      user.profile.lastName = req.body.lastName;
     }
     if (req.body.email) {
       user.email = req.body.email;
@@ -192,8 +192,11 @@ exports.postProfileEdit = (req, res) => {
     if (req.body.email) {
       user.email = req.body.email;
     }
-    if (req.body.name) {
-      user.profile.name = req.body.name;
+    if (req.body.firstName) {
+      user.profile.firstName = req.body.firstName;
+    }
+    if (req.body.lastName) {
+      user.profile.lastName = req.body.lastName;
     }
     if (req.body.location) {
       user.profile.location = req.body.location;

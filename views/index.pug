@@ -3,8 +3,8 @@ extends layout.pug
 block content
   h1= message
   if user
-    if user.profile.name
-      p Welcome #{user.profile.name}.
+    if user.profile.firstName
+      p Welcome #{user.profile.firstName}.
     else
       p Welcome unnamed person.
   else
