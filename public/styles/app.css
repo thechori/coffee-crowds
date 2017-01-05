@@ -11,3 +11,8 @@
 #login-errors h3 {
   color: red;
 }
+
+.user-picture {
+  border: 1px solid orange;
+  padding: 10px;
+}

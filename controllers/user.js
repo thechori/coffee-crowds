@@ -192,6 +192,9 @@ exports.postProfileEdit = (req, res) => {
     if (req.body.email) {
       user.email = req.body.email;
     }
+    if (req.body.picture) {
+      user.profile.picture = req.body.picture;
+    }
     if (req.body.firstName) {
       user.profile.firstName = req.body.firstName;
     }
