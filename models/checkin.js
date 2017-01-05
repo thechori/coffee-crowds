@@ -18,9 +18,13 @@ var CheckinSchema = new mongoose.Schema({
   comment: {
     type: String,
     max: 100
-  }
+  },
+  location: [Number]
 }, {
   timestamps: true
 });
+
+// Index the location
+CheckinSchema.index({ location: '2d' });
 
 module.exports = mongoose.model('Checkin', CheckinSchema);
