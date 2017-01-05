@@ -23,6 +23,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 3. View application running at http://localhost:3000
 
 ## TODO
+- Integrate Google Map API and location data to the appropriate schemas
 - Build simple UI for web interaction
 - Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
 
@@ -34,6 +35,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 
 
 ## Enhancements
+- Actual pictures from CoffeeShop that illustrate different crowd ratings
 - Price ratings ($-$$$$)
 - Ability for User to flag an inaccurate Checkin or malicious User
 - Admin functionality on the front end
