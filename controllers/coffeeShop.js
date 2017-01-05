@@ -56,7 +56,8 @@ exports.postNewCoffeeShop = (req, res) => {
   let coffeeShop = new CoffeeShop({
     userId: req.user._id,
     name: req.body.name,
-    address: req.body.address
+    address: req.body.address,
+    location: [req.body.lon, req.body.lat]
   });
 
   coffeeShop.save((err) => {

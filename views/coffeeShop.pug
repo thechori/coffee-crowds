@@ -5,6 +5,8 @@ block content
   p Name: #{coffeeShop.name}
   p User Id: #{coffeeShop.userId}
   p Address: #{coffeeShop.address}
+  if (coffeeShop.location)
+    p Location: #{coffeeShop.location[0]}, #{coffeeShop.location[1]}
   br
   if (user)
     a(href='/newCheckin/' + coffeeShop._id) Checkin Here
