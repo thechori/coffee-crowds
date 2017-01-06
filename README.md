@@ -33,7 +33,6 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 - User sessions (login/logout)
 - Replace "name" with "firstName" and "lastName" on User schema
 
-
 ## Enhancements
 - Actual pictures from CoffeeShop that illustrate different crowd ratings
 - Price ratings ($-$$$$)
