@@ -107,10 +107,9 @@ router.route('/checkins/:checkinId')
 router.route('/mycheckins')
   .get(authController.isAuthenticated, checkinController.getMyCheckins)
 
-// Register the routes object
+// Register the routes object from above
 app.use('/api', router);
 
-// From routes.js
 app.get('/', indexController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -129,7 +128,8 @@ app.post('/newCoffeeShop', coffeeShopController.postNewCoffeeShop);
 app.get('/newCheckin', checkinController.getNewCheckin);
 app.get('/newCheckin/:coffeeShopId', checkinController.getNewCheckinWithId);
 app.post('/newCheckin', checkinController.postNewCheckin);
-// End from routes.js
+
+app.get('/map', coffeeShopController.getMap);
 
 // Start the server
 var port = process.env.PORT || 3000;

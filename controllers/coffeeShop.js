@@ -52,7 +52,6 @@ exports.getNewCoffeeShop = (req, res) => {
 };
 
 exports.postNewCoffeeShop = (req, res) => {
-
   let coffeeShop = new CoffeeShop({
     userId: req.user._id,
     name: req.body.name,
@@ -63,6 +62,21 @@ exports.postNewCoffeeShop = (req, res) => {
   coffeeShop.save((err) => {
     if (err) { return res.send(err); }
     return res.redirect('/coffeeShop/' + coffeeShop._id);
+  });
+};
+
+exports.getMap = (req, res) => {
+  console.log("getMap");
+  // Get all of the CoffeeShops
+  CoffeeShop.find((err, coffeeShops) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    // Pass the CoffeeShop data to the map view
+    res.render('coffeeShopMap', {
+      coffeeShops: coffeeShops
+    });
   });
 };
 
