@@ -24,6 +24,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 
 ## TODO
 - Integrate Google Map API and location data to the appropriate schemas
+- Break apart functionality into releases and adopt the semantic release methodology (major.minor.patch)
 - Build simple UI for web interaction
 - Figure out how to hook up front end to RESTful API that is built instead of reinventing the wheels that you've already built
 
@@ -41,6 +42,7 @@ $ git clone git@gitlab.com:teodizzo/coffee-crowds.git
 - Approval process for new CoffeeShops
 - Prevent duplicate CoffeeShop creation
 - Integrate React for view rendering
+- Ability to upload a picture during a Checkin
 
 ## Slogans
 "Stop guessing where to go to enjoy that cup of coffee"
